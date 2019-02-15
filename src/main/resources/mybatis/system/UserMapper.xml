@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.dao.UserDao">
+
+	<resultMap id="userResultMap" type="com.system.domain.UserDO">
+		<id property="userName" column="user_name"/>
+		<id property="headPath" column="head_path"/>
+	</resultMap>
+
+	<select id="get" resultMap="userResultMap">
+		select `id`,`user_name`,`name`,`password`,`sex`,`dept_id`,`email`,`phone`,
+		`address`,`create_user`,`create_date`,`is_delete`, `head_path` from user where id = #{value}
+	</select>
+
+	<select id="list" resultMap="userResultMap">
+		select `id`,`user_name`,`name`,`password`,`sex`,`dept_id`,`email`,`phone`,`address`,`create_user`,`create_date`,`is_delete`, `head_path` from user
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
+		  		  <if test="email != null and email != ''"> and email = #{email} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by create_date desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from user
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="password != null and password != ''"> and password = #{password} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
+		  		  <if test="email != null and email != ''"> and email = #{email} </if>
+		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.system.domain.UserDO">
+		insert into user
+		(
+			`id`, 
+			`user_name`,
+			`name`,
+			`password`, 
+			`sex`, 
+			`dept_id`, 
+			`email`, 
+			`phone`, 
+			`address`, 
+			`create_user`, 
+			`create_date`, 
+			`is_delete`,
+			`head_path`
+		)
+		values
+		(
+			#{id}, 
+			#{userName},
+			#{name},
+			#{password}, 
+			#{sex}, 
+			#{deptId}, 
+			#{email}, 
+			#{phone}, 
+			#{address}, 
+			#{createUser}, 
+			#{createDate}, 
+			#{isDelete},
+			#{headPath}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.system.domain.UserDO">
+		update user 
+		<set>
+			<if test="userName != null">`user_name` = #{userName}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="deptId != null">`dept_id` = #{deptId}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="phone != null">`phone` = #{phone}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="createUser != null">`create_user` = #{createUser}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
+			<if test="headPath != null">`head_path` = #{headPath}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from user where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="getByUserName" resultMap="userResultMap">
+		select `id`,`user_name`,`name`,`password`,`sex`,`dept_id`,`email`,
+		`phone`,`address`,`create_user`,`create_date`,`is_delete`, `head_path` from user where user_name = #{value}
+	</select>
+
+</mapper>

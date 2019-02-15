@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/doubleboot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+server:
+  port: 8081
+  session-timeout: 7200
+mybatis:
+  configuration:
+    map-undersore-to-camel-case: true
+  mapper-locations: mybatis/*/*Mapper.xml
+  typeAliasesPackage: com.*.*.domain
+logging:
+  level:
+    root: info
+    com.system: debug
+
+sysfileconfig:
+  uploadPath: /boot/system/
+
+
+
