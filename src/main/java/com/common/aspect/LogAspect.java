@@ -3,7 +3,6 @@ package com.common.aspect;
 import com.common.annotation.Log;
 import com.common.shiro.ShiroTool;
 import com.common.tool.MyUtils;
-import com.sun.xml.internal.messaging.saaj.util.LogDomainConstants;
 import com.system.domain.LogDO;
 import com.system.domain.UserDO;
 import com.system.service.LogService;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
 

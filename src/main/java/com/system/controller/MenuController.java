@@ -71,7 +71,8 @@ public class MenuController {
 	@ResponseBody
 	// @RequiresPermissions("sys:menu")
 	List<Tree<MenuDO>> treeListByUser(@PathVariable(value = "id") String id){
-		return menuService.getTree(id).getChildren();
+		List<Tree<MenuDO>> list = menuService.getTree(id).getChildren();
+		return list;
 	}
 
 	/**
