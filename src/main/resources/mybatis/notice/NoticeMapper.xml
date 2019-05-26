@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.notice.dao.NoticeDao">
+
+	<select id="get" resultType="com.notice.domain.NoticeDO">
+		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user` from notice where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.notice.domain.NoticeDO">
+		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user` from notice
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="files != null and files != ''"> and files = #{files} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateUser != null and updateUser != ''"> and update_user = #{updateUser} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from notice
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="files != null and files != ''"> and files = #{files} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateUser != null and updateUser != ''"> and update_user = #{updateUser} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.notice.domain.NoticeDO">
+		insert into notice
+		(
+			`id`, 
+			`type`, 
+			`title`, 
+			`content`, 
+			`files`, 
+			`status`, 
+			`remarks`, 
+			`create_date`, 
+			`update_user`, 
+			`update_date`, 
+			`is_delete`, 
+			`create_user`
+		)
+		values
+		(
+			#{id}, 
+			#{type}, 
+			#{title}, 
+			#{content}, 
+			#{files}, 
+			#{status}, 
+			#{remarks}, 
+			#{createDate}, 
+			#{updateUser}, 
+			#{updateDate}, 
+			#{isDelete}, 
+			#{createUser}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.notice.domain.NoticeDO">
+		update notice 
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="files != null">`files` = #{files}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="remarks != null">`remarks` = #{remarks}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateUser != null">`update_user` = #{updateUser}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}, </if>
+			<if test="createUser != null">`create_user` = #{createUser}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from notice where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from notice where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

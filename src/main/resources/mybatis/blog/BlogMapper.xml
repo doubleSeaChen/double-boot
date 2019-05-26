@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blog.dao.BlogDao">
+
+	<select id="get" resultType="com.blog.domain.BlogDO">
+		select `id`,`title`,`content`,`type`,`tags`,`categories`,`comments_num`,`status`,`created_user`,`update_user`,`author`,`create_date`,`update_date` from blog where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.blog.domain.BlogDO">
+		select `id`,`title`,`content`,`type`,`tags`,`categories`,`comments_num`,`status`,`created_user`,`update_user`,`author`,`create_date`,`update_date` from blog
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="tags != null and tags != ''"> and tags = #{tags} </if>
+		  		  <if test="categories != null and categories != ''"> and categories = #{categories} </if>
+		  		  <if test="commentsNum != null and commentsNum != ''"> and comments_num = #{commentsNum} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createdUser != null and createdUser != ''"> and created_user = #{createdUser} </if>
+		  		  <if test="updateUser != null and updateUser != ''"> and update_user = #{updateUser} </if>
+		  		  <if test="author != null and author != ''"> and author = #{author} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from blog
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="tags != null and tags != ''"> and tags = #{tags} </if>
+		  		  <if test="categories != null and categories != ''"> and categories = #{categories} </if>
+		  		  <if test="commentsNum != null and commentsNum != ''"> and comments_num = #{commentsNum} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createdUser != null and createdUser != ''"> and created_user = #{createdUser} </if>
+		  		  <if test="updateUser != null and updateUser != ''"> and update_user = #{updateUser} </if>
+		  		  <if test="author != null and author != ''"> and author = #{author} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.blog.domain.BlogDO">
+		insert into blog
+		(
+			`id`, 
+			`title`, 
+			`content`, 
+			`type`, 
+			`tags`, 
+			`categories`, 
+			`comments_num`, 
+			`status`, 
+			`created_user`, 
+			`update_user`, 
+			`author`, 
+			`create_date`, 
+			`update_date`
+		)
+		values
+		(
+			#{id}, 
+			#{title}, 
+			#{content}, 
+			#{type}, 
+			#{tags}, 
+			#{categories}, 
+			#{commentsNum}, 
+			#{status}, 
+			#{createdUser}, 
+			#{updateUser}, 
+			#{author}, 
+			#{createDate}, 
+			#{updateDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.blog.domain.BlogDO">
+		update blog 
+		<set>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="tags != null">`tags` = #{tags}, </if>
+			<if test="categories != null">`categories` = #{categories}, </if>
+			<if test="commentsNum != null">`comments_num` = #{commentsNum}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createdUser != null">`created_user` = #{createdUser}, </if>
+			<if test="updateUser != null">`update_user` = #{updateUser}, </if>
+			<if test="author != null">`author` = #{author}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from blog where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from blog where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
