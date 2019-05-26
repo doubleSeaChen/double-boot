@@ -1,5 +1,7 @@
 package com.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,14 +29,16 @@ public class BlogDO implements Serializable {
 	//状态
 	private Integer status;
 	//创建人id
-	private Long createdUser;
+	private String createdUser;
 	//修改人id
-	private Long updateUser;
+	private String updateUser;
 	//作者
 	private String author;
 	//创建时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createDate;
 	//修改时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date updateDate;
 
 	/**
@@ -134,30 +138,6 @@ public class BlogDO implements Serializable {
 		return status;
 	}
 	/**
-	 * 设置：创建人id
-	 */
-	public void setCreatedUser(Long createdUser) {
-		this.createdUser = createdUser;
-	}
-	/**
-	 * 获取：创建人id
-	 */
-	public Long getCreatedUser() {
-		return createdUser;
-	}
-	/**
-	 * 设置：修改人id
-	 */
-	public void setUpdateUser(Long updateUser) {
-		this.updateUser = updateUser;
-	}
-	/**
-	 * 获取：修改人id
-	 */
-	public Long getUpdateUser() {
-		return updateUser;
-	}
-	/**
 	 * 设置：作者
 	 */
 	public void setAuthor(String author) {
@@ -192,5 +172,21 @@ public class BlogDO implements Serializable {
 	 */
 	public Date getUpdateDate() {
 		return updateDate;
+	}
+
+	public String getCreatedUser() {
+		return createdUser;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setCreatedUser(String createdUser) {
+		this.createdUser = createdUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 }

@@ -23,7 +23,6 @@ public class UserRealm extends AuthorizingRealm{
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("查询用户相关权限逻辑");
         String userId = ShiroTool.getUserId();
         MenuService menuService = ApplicationContextRegister.getBean(MenuService.class);
         // 查询当前用户所拥有的权限标识

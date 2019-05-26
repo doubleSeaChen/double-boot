@@ -1,8 +1,11 @@
 package com.blog.service.impl;
 
+import com.common.shiro.ShiroTool;
+import com.common.tool.MyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,8 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Override
 	public List<BlogDO> list(Map<String, Object> map){
+		map.put("sort","create_date");
+		map.put("order","desc");
 		return blogDao.list(map);
 	}
 	
@@ -31,11 +36,16 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Override
 	public int save(BlogDO blog){
+		blog.setId(MyUtils.getUUID32());
+		blog.setCreateDate(new Date());
+		blog.setCreatedUser(ShiroTool.getUserId());
 		return blogDao.save(blog);
 	}
 	
 	@Override
 	public int update(BlogDO blog){
+		blog.setUpdateDate(new Date());
+		blog.setUpdateUser(ShiroTool.getUserId());
 		return blogDao.update(blog);
 	}
 	

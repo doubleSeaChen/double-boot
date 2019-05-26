@@ -1,5 +1,7 @@
 package com.notice.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,15 +29,17 @@ public class NoticeDO implements Serializable {
 	//备注信息
 	private String remarks;
 	//创建时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createDate;
 	//更新者
 	private String updateUser;
 	//更新时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date updateDate;
 	//删除标记
 	private Integer isDelete;
 	//创建者
-	private Long createUser;
+	private String createUser;
 
 	/**
 	 * 设置：编号
@@ -169,16 +173,12 @@ public class NoticeDO implements Serializable {
 	public Integer getIsDelete() {
 		return isDelete;
 	}
-	/**
-	 * 设置：创建者
-	 */
-	public void setCreateUser(Long createUser) {
-		this.createUser = createUser;
-	}
-	/**
-	 * 获取：创建者
-	 */
-	public Long getCreateUser() {
+
+	public String getCreateUser() {
 		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 }

@@ -59,7 +59,7 @@ public class BlogController {
 	@RequestMapping("/update")
 	@RequiresPermissions("blog:edit")
 	public Object update(@RequestBody BlogDO blog){
-		if(blogService.update(blog)>1){
+		if(blogService.update(blog)>0){
 			return 1;
 		}else {
 			return 0;
@@ -75,8 +75,9 @@ public class BlogController {
 	public Object remove(@PathVariable("id") String id){
 		if(blogService.remove(id)>0){
 			return 1;
+		}else{
+			return 0;
 		}
-		return 0;
 	}
 	
 }

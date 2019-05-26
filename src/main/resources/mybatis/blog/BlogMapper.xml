@@ -3,15 +3,19 @@
 
 <mapper namespace="com.blog.dao.BlogDao">
 
-	<select id="get" resultType="com.blog.domain.BlogDO">
+	<resultMap id="baseResultMap" type="com.blog.domain.BlogDO">
+		<id property="createDate" column="create_date"/>
+	</resultMap>
+
+	<select id="get" resultMap="baseResultMap">
 		select `id`,`title`,`content`,`type`,`tags`,`categories`,`comments_num`,`status`,`created_user`,`update_user`,`author`,`create_date`,`update_date` from blog where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.blog.domain.BlogDO">
+	<select id="list" resultMap="baseResultMap">
 		select `id`,`title`,`content`,`type`,`tags`,`categories`,`comments_num`,`status`,`created_user`,`update_user`,`author`,`create_date`,`update_date` from blog
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="title != null and title != ''"> and title like '%${title}%' </if>
 		  		  <if test="content != null and content != ''"> and content = #{content} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="tags != null and tags != ''"> and tags = #{tags} </if>
@@ -41,7 +45,7 @@
 		select count(*) from blog
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="title != null and title != ''"> and title like '%${title}%' </if>
 		  		  <if test="content != null and content != ''"> and content = #{content} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="tags != null and tags != ''"> and tags = #{tags} </if>

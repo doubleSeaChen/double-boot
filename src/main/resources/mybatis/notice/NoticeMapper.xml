@@ -3,16 +3,20 @@
 
 <mapper namespace="com.notice.dao.NoticeDao">
 
-	<select id="get" resultType="com.notice.domain.NoticeDO">
+	<resultMap id="baseResultMap" type="com.notice.domain.NoticeDO">
+		<id property="createDate" column="create_date"/>
+	</resultMap>
+
+	<select id="get"  resultMap="baseResultMap">
 		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user` from notice where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.notice.domain.NoticeDO">
+	<select id="list"  resultMap="baseResultMap">
 		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user` from notice
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="title != null and title != ''"> and title like '%${title}%'</if>
 		  		  <if test="content != null and content != ''"> and content = #{content} </if>
 		  		  <if test="files != null and files != ''"> and files = #{files} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
@@ -41,7 +45,7 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="title != null and title != ''"> and title like '%${title}%' </if>
 		  		  <if test="content != null and content != ''"> and content = #{content} </if>
 		  		  <if test="files != null and files != ''"> and files = #{files} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
