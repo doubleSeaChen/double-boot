@@ -10,7 +10,6 @@ import java.util.Map;
  * 系统日志
  * 
  * @author doublesea
- * @email 1992lcg@163.com
  * @date 2018-11-18 13:10:19
  */
 public interface LogService {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.common.tool.ParamsForMatter;
 import com.system.domain.LogDO;
 import com.system.service.LogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 系统日志
  * 
  * @author doublesea
- * @email 1992lcg@163.com
  * @date 2018-11-18 13:10:19
  */
  
@@ -36,9 +36,7 @@ public class LogController {
 	@GetMapping("/list")
 	@RequiresPermissions("sys:log")
 	public Object list(@RequestParam Map<String, Object> params){
-		Map<String, Object> currenParams = new HashMap<>();
-		currenParams.put("offset", Integer.valueOf(params.get("offset").toString()));
-		currenParams.put("limit", Integer.valueOf(params.get("limit").toString()));
+		ParamsForMatter currenParams = new ParamsForMatter(params);
 		List<LogDO> logList = logService.list(currenParams);
 		int total = logService.count(currenParams);
 		Map<String, Object> data = new HashMap<>();

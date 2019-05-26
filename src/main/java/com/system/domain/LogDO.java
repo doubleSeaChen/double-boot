@@ -1,5 +1,7 @@
 package com.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +34,7 @@ public class LogDO implements Serializable {
 	//IP地址
 	private String ip;
 	//创建时间
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createDate;
 	// 登录人姓名
 	private String name;

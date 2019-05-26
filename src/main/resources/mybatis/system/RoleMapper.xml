@@ -11,7 +11,7 @@
 		select `id`,`name`,`sign`,`remark`,`create_user`,`create_date`,`is_delete` from role
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="name != null and name != ''"> and name like '%${name}%'</if>
 		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
@@ -35,7 +35,7 @@
 		select count(*) from role
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="name != null and name != ''"> and name like '%${name}%'</if>
 		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>

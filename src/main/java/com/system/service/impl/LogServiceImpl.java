@@ -25,6 +25,8 @@ public class LogServiceImpl implements LogService {
 	
 	@Override
 	public List<LogDO> list(Map<String, Object> map){
+		map.put("sort","create_date");
+		map.put("order","desc");
 		return logDao.list(map);
 	}
 	

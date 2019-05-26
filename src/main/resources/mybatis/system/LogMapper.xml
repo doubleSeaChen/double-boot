@@ -16,7 +16,7 @@
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name like '%${userName}%'</if>
 		  		  <if test="operation != null and operation != ''"> and operation = #{operation} </if>
 		  		  <if test="time != null and time != ''"> and time = #{time} </if>
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>
@@ -42,7 +42,7 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
-		  		  <if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+		  		  <if test="userName != null and userName != ''"> and user_name like '%${userName}%'</if>
 		  		  <if test="operation != null and operation != ''"> and operation = #{operation} </if>
 		  		  <if test="time != null and time != ''"> and time = #{time} </if>
 		  		  <if test="method != null and method != ''"> and method = #{method} </if>

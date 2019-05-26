@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 
  * @author doublesea
- * @email 1992lcg@163.com
  * @date 2018-11-18 13:11:22
  */
 @Mapper

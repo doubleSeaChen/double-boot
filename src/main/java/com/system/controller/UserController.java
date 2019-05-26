@@ -7,6 +7,7 @@ import java.util.Map;
 import com.common.shiro.ShiroTool;
 import com.common.tool.FileUtil;
 import com.common.tool.MyUtils;
+import com.common.tool.ParamsForMatter;
 import com.system.config.DoubleBootConfig;
 import com.system.domain.UserDO;
 import com.system.service.UserService;
@@ -25,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author doublesea
- * @email 1992lcg@163.com
  * @date 2018-11-18 13:11:22
  */
  
@@ -42,9 +42,7 @@ public class UserController {
 	@GetMapping("/list")
 	@RequiresPermissions("sys:user")
 	public Object list(@RequestParam Map<String, Object> params){
-		Map<String, Object> currenParams = new HashMap<>();
-		currenParams.put("offset", Integer.valueOf(params.get("offset").toString()));
-		currenParams.put("limit", Integer.valueOf(params.get("limit").toString()));
+		ParamsForMatter currenParams = new ParamsForMatter(params);
 		List<UserDO> userList = userService.list(currenParams);
 		int total = userService.count(currenParams);
 		Map<String, Object> data = new HashMap<>();
