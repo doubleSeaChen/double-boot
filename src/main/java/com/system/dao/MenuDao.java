@@ -8,10 +8,7 @@ import com.system.domain.MenuDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 
  * @author doublesea
- * @email 1992lcg@163.com
- * @date 2018-11-18 13:10:31
  */
 @Mapper
 public interface MenuDao {

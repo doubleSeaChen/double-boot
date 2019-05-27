@@ -3,11 +3,19 @@
 
 <mapper namespace="com.system.dao.DeptDao">
 
+	<resultMap id="deptResultMap" type="com.system.domain.DeptDO">
+		<id property="parentId" column="parent_id"/>
+	</resultMap>
+
 	<select id="get" resultType="com.system.domain.DeptDO">
 		select `id`,`parent_id`,`name`,`order_num`,`is_delete` from dept where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.system.domain.DeptDO">
+	<select id="listAll" resultType="com.system.domain.DeptDO">
+		select `id`,`parent_id`,`name`,`order_num`,`is_delete` from dept
+	</select>
+
+	<select id="list" resultMap="deptResultMap">
 		select `id`,`parent_id`,`name`,`order_num`,`is_delete` from dept
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>

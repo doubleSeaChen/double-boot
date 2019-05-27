@@ -18,6 +18,8 @@ public interface DeptDao {
 	DeptDO get(String id);
 	
 	List<DeptDO> list(Map<String, Object> map);
+
+	List<DeptDO> listAll();
 	
 	int count(Map<String, Object> map);
 	

@@ -1,16 +1,13 @@
 package com.system.service;
 
+import com.common.tool.Tree;
 import com.system.domain.DeptDO;
-
 import java.util.List;
 import java.util.Map;
 
 /**
  * 部门管理
- * 
  * @author doublesea
- * @email 1992lcg@163.com
- * @date 2018-11-18 13:09:56
  */
 public interface DeptService {
 	
@@ -27,4 +24,6 @@ public interface DeptService {
 	int remove(String id);
 	
 	int batchRemove(String[] ids);
+
+	Tree<DeptDO> getTree();
 }

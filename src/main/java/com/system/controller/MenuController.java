@@ -18,11 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 
- * 
  * @author doublesea
- * @email 1992lcg@163.com
- * @date 2018-11-18 13:10:31
  */
  
 @Controller
@@ -35,10 +31,6 @@ public class MenuController {
 	@GetMapping("/list")
 	@RequiresPermissions("sys:menu")
 	public List<Tree<MenuDO>> list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-		/*List<MenuDO> menuList = menuService.list(params);
-		return menuList;*/
-		// Tree<MenuDO> list = menuService.getTree();
         List<Tree<MenuDO>> list = menuService.getTree().getChildren();
 		return list;
 	}
@@ -54,8 +46,6 @@ public class MenuController {
 	@ResponseBody
 	@RequiresPermissions("sys:menu")
 	public List<String> listByRoleId(@PathVariable(value = "roleId") String roleId){
-		/*List<Tree<MenuDO>> list = menuService.getTreeByRoleId(roleId).getChildren();
-		return list;*/
 		List<String> list = menuService.getMenuByRoleId(roleId);
 		return list;
 	}
