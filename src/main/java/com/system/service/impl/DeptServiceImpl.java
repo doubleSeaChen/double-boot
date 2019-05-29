@@ -1,6 +1,7 @@
 package com.system.service.impl;
 
 import com.common.tool.CreateTree;
+import com.common.tool.MyUtils;
 import com.common.tool.Tree;
 import com.system.dao.DeptDao;
 import com.system.domain.DeptDO;
@@ -36,6 +37,7 @@ public class DeptServiceImpl implements DeptService {
 	
 	@Override
 	public int save(DeptDO dept){
+		dept.setId(MyUtils.getUUID32());
 		return deptDao.save(dept);
 	}
 	
