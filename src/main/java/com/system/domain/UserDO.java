@@ -6,11 +6,7 @@ import java.util.List;
 
 
 /**
- * 
- * 
  * @author doublesea
- * @email 1992lcg@163.com
- * @date 2018-11-18 13:11:22
  */
 public class UserDO implements Serializable {
 	private static final long serialVersionUID = 1L;
