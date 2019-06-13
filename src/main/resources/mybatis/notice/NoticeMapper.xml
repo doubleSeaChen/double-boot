@@ -58,7 +58,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.notice.domain.NoticeDO">
+	<insert id="save" parameterType="com.notice.domain.NoticeDO" useGeneratedKeys="true" keyProperty="id">
 		insert into notice
 		(
 			`id`, 

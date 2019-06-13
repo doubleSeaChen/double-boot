@@ -28,6 +28,9 @@ public class NoticeDO implements Serializable {
 	private String status;
 	//备注信息
 	private String remarks;
+
+	private String[] userIds;
+
 	//创建时间
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createDate;
@@ -180,5 +183,13 @@ public class NoticeDO implements Serializable {
 
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
+	}
+
+	public String[] getUserIds() {
+		return userIds;
+	}
+
+	public void setUserIds(String[] userIds) {
+		this.userIds = userIds;
 	}
 }
