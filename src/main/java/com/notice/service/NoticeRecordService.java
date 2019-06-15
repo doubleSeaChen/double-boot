@@ -13,6 +13,12 @@ public interface NoticeRecordService {
 	NoticeRecordDO get(String id);
 	
 	List<NoticeRecordDO> list(Map<String, Object> map);
+
+	List<Map<String, Object>> getUserNotice();
+
+	Map<String, Object> getUserNoticeById(String id);
+
+	int setRead(String id);
 	
 	int count(Map<String, Object> map);
 	

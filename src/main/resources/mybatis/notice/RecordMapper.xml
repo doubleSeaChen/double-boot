@@ -3,8 +3,23 @@
 
 <mapper namespace="com.notice.dao.NoticeRecordDao">
 
+	<resultMap id="baseResultMap" type="com.notice.domain.NoticeRecordDO">
+		<id property="notifyId" column="notify_id"/>
+	</resultMap>
+
 	<select id="get" resultType="com.notice.domain.NoticeRecordDO">
 		select `id`,`notify_id`,`user_id`,`is_read`,`read_date` from notice_record where id = #{value}
+	</select>
+
+	<select id="getUserNotice" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select tn.id, tn.notify_id, tt.title, tt.content from notice_record tn join notice tt on tn.notify_id = tt.id
+		and tn.is_read = 0 and tn.user_id = #{value}
+	</select>
+
+	<select id="getUserNoticeById" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select tn.id, t.title, t.content from notice_record tn
+		join notice t on tn.notify_id = t.id
+		where tn.id = #{value}
 	</select>
 
 	<select id="list" resultType="com.notice.domain.NoticeRecordDO">

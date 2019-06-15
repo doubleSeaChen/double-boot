@@ -26,10 +26,30 @@ import com.notice.service.NoticeRecordService;
  
 @Controller
 @RequestMapping("/notice/record")
-public class RecordController {
+public class NoticeRecordController {
 	@Autowired
 	private NoticeRecordService recordService;
-	
+
+	@ResponseBody
+	@GetMapping("/getUserNotice")
+	public Object getUserNotice(){
+		List<Map<String, Object>> list = recordService.getUserNotice();
+		return list;
+	}
+
+	@ResponseBody
+	@PostMapping("/getUserNoticeById/{id}")
+	public Object getUserNoticeById(@PathVariable("id") String id){
+		Map<String, Object> data = recordService.getUserNoticeById(id);
+		return data;
+	}
+
+	@ResponseBody
+	@PostMapping("/setRead/{id}")
+	public Object setRead(@PathVariable("id") String id){
+		return recordService.setRead(id);
+	}
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("notice:record:record")
@@ -56,32 +76,6 @@ public class RecordController {
 		}
 		return 0;
 	}
-	/**
-	 * 修改
-	 */
-	@ResponseBody
-	@RequestMapping("/update")
-	@RequiresPermissions("notice:record:edit")
-	public Object update(@RequestBody NoticeRecordDO record){
-		if(recordService.update(record)>0){
-			return 1;
-		}else {
-			return 0;
-		}
-	}
-	
-	/**
-	 * 删除
-	 */
-	@PostMapping( "/remove/{id}")
-	@ResponseBody
-	@RequiresPermissions("notice:record:remove")
-	public Object remove(@PathVariable("id") String id){
-		if(recordService.remove(id)>0){
-			return 1;
-		}else {
-			return 0;
-		}
-	}
+
 
 }

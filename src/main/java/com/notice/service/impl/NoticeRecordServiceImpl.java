@@ -1,8 +1,11 @@
 package com.notice.service.impl;
 
+import com.common.shiro.ShiroTool;
+import com.common.tool.MyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +27,29 @@ public class NoticeRecordServiceImpl implements NoticeRecordService {
 	public List<NoticeRecordDO> list(Map<String, Object> map){
 		return recordDao.list(map);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> getUserNotice() {
+		return recordDao.getUserNotice(ShiroTool.getUserId());
+	}
+
+	@Override
+	public Map<String, Object> getUserNoticeById(String id) {
+		return recordDao.getUserNoticeById(id);
+	}
+
+	@Override
+	public int setRead(String id) {
+		NoticeRecordDO recordDO = recordDao.get(id);
+		if(null != recordDO){
+			recordDO.setIsRead(1);
+			recordDO.setReadDate(new Date());
+			return recordDao.update(recordDO);
+		}else{
+			return 0;
+		}
+	}
+
 	@Override
 	public int count(Map<String, Object> map){
 		return recordDao.count(map);

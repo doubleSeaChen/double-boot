@@ -16,6 +16,10 @@ public interface NoticeRecordDao {
 	NoticeRecordDO get(String id);
 	
 	List<NoticeRecordDO> list(Map<String, Object> map);
+
+	List<Map<String, Object>> getUserNotice(String userId);
+
+	Map<String, Object> getUserNoticeById(String id);
 	
 	int count(Map<String, Object> map);
 	
