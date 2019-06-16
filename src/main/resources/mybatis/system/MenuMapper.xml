@@ -13,7 +13,7 @@
 
 	<select id="list" resultMap="menuResultMap">
 		select `id`,`name`,`parent_id`,`sign`,`type`,`order`,`router`,`create_user`,`create_date`,`is_delete`,`component`,`icon` from menu
-        <where>  
+        where is_delete = 0
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
@@ -23,8 +23,6 @@
 		  		  <if test="router != null and router != ''"> and router = #{router} </if>
 		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
 		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
-		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -41,7 +39,7 @@
 
 	<select id="listOfNoButton" resultMap="menuResultMap">
 		select `id`,`name`,`parent_id`,`sign`,`type`,`order`,`router`,`create_user`,
-		`create_date`,`is_delete`,`component`,`icon` from menu where type in (1,2)
+		`create_date`,`is_delete`,`component`,`icon` from menu where type in (1,2) and is_delete = 0
 	</select>
 	
  	<select id="count" resultType="int">
@@ -126,7 +124,7 @@
 		select distinct m.sign from menu m left join
 		role_menu rm on m.id = rm.menu_id
 		left join user_role ur
-		on rm.role_id = ur.role_id where ur.user_id
+		on rm.role_id = ur.role_id where m.is_delete = 0 and ur.user_id
 		= #{id}
 	</select>
 
@@ -134,7 +132,7 @@
 		select m.* from menu m
 		left join role_menu rm on m.id = rm.menu_id
 		left join user_role ur on ur.role_id=rm.role_id
-		where ur.user_id=#{id} and m.type in (1,2)
+		where ur.user_id=#{id} and m.type in (1,2) and m.is_delete = 0
 	</select>
 
 </mapper>
