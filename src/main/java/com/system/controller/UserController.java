@@ -53,11 +53,17 @@ public class UserController {
 		return data;
 	}
 
-	@PostMapping("/get/{id}")
+	@PostMapping("/isExist/{userName}")
 	@ResponseBody
-	public Object get(@PathVariable("id") String id){
-		return userService.get(id);
+	public Object isExist(@PathVariable("userName") String userName){
+		return userService.getByUserName(userName)==null?0:1;
 	}
+
+    @PostMapping("/get/{id}")
+    @ResponseBody
+    public Object get(@PathVariable("id") String id){
+        return userService.get(id);
+    }
 	
 	/**
 	 * 保存
