@@ -56,6 +56,8 @@ public class UserServiceImpl implements UserService {
 				userRoleDO.setId(MyUtils.getUUID32());
 				userRoleDO.setUserId(user.getId());
 				userRoleDO.setRoleId(e);
+				userRoleDO.setCreateDate(MyUtils.getNowDateFormatString());
+				userRoleDO.setCreateUser(ShiroTool.getUserId());
 				userRoleDao.save(userRoleDO);
 			});
 			return 1;
@@ -86,7 +88,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional
 	public int remove(String id){
+		// 删除该用户的角色关系
+		userRoleDao.removeByUserId(id);
 		return userDao.remove(id);
 	}
 	

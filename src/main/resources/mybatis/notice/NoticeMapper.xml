@@ -8,7 +8,14 @@
 	</resultMap>
 
 	<select id="get"  resultMap="baseResultMap">
-		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user` from notice where id = #{value}
+		select `id`,`type`,`title`,`content`,`files`,`status`,`remarks`,`create_date`,`update_user`,`update_date`,`is_delete`,`create_user`
+		from notice where id = #{value}
+	</select>
+	
+	<select id="getNoticeUsers" resultType="java.util.Map">
+		select * from notice_record t
+		join (select t.id userId, t.name userName, d.`name` deptName from user t join dept d on t.dept_id = d.id)ud on t.user_id = ud.userId
+		where t.notify_id = #{value}
 	</select>
 
 	<select id="list"  resultMap="baseResultMap">

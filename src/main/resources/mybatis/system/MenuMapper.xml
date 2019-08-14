@@ -12,25 +12,19 @@
 	</select>
 
 	<select id="list" resultMap="menuResultMap">
-		select `id`,`name`,`parent_id`,`sign`,`type`,`order`,`router`,`create_user`,`create_date`,`is_delete`,`component`,`icon` from menu
+		select `id`,`name`,`parent_id`,`sign`,`type`,`order`,`router`,`create_user`,`create_date`,`is_delete`,`component`,`icon` from menu m
         where is_delete = 0
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
-		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
-		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="order != null and order != ''"> and order = #{order} </if>
-		  		  <if test="router != null and router != ''"> and router = #{router} </if>
-		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
-		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
-			<otherwise>
-                order by id desc
-			</otherwise>
-        </choose>
+		  		  <if test="id != null and id != ''"> and m.id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and m.name = #{name} </if>
+		  		  <if test="parentId != null and parentId != ''"> and m.parent_id = #{parentId} </if>
+		  		  <if test="sign != null and sign != ''"> and m.sign = #{sign} </if>
+		  		  <if test="type != null and type != ''"> and m.type = #{type} </if>
+		  		  <if test="order != null and order != ''"> and m.order = #{order} </if>
+		  		  <if test="router != null and router != ''"> and m.router = #{router} </if>
+		  		  <if test="createUser != null and createUser != ''"> and m.create_user = #{createUser} </if>
+		  		  <if test="createDate != null and createDate != ''"> and m.create_date = #{createDate} </if>
+		order by m.order asc
+
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
@@ -132,7 +126,7 @@
 		select m.* from menu m
 		left join role_menu rm on m.id = rm.menu_id
 		left join user_role ur on ur.role_id=rm.role_id
-		where ur.user_id=#{id} and m.type in (1,2) and m.is_delete = 0
+		where ur.user_id=#{id} and m.type in (1,2) and m.is_delete = 0 order by m.order asc
 	</select>
 
 </mapper>

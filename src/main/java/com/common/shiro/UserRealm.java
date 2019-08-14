@@ -48,7 +48,8 @@ public class UserRealm extends AuthorizingRealm{
 
         UserDao userMapper = ApplicationContextRegister.getBean(UserDao.class);
         // 查询用户信息
-        UserDO user = userMapper.list(map).get(0);
+        // UserDO user = userMapper.list(map).get(0);
+        UserDO user = userMapper.getByUserName(username);
 
         // 账号不存在
         if (user == null) {

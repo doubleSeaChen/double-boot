@@ -23,4 +23,6 @@ public interface NoticeService {
 	int remove(String id);
 	
 	int batchRemove(String[] ids);
+
+	List<Map<String, Object>> getNoticeUsers(String noticeId);
 }

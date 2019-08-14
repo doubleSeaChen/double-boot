@@ -85,5 +85,11 @@ public class NoticeController {
 			return 0;
 		}
 	}
-	
+
+	@ResponseBody
+	@PostMapping("/getNoticeUsers/{noticeId}")
+	public Object getNoticeUsers(@PathVariable("noticeId") String noticeId){
+		List<Map<String, Object>> noticeUsers = noticeService.getNoticeUsers(noticeId);
+		return noticeUsers;
+	}
 }

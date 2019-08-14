@@ -22,6 +22,7 @@ public class UserDO implements Serializable {
 	private String sex;
 	//归属部门ID
 	private String deptId;
+	private String deptName;
 	//用户邮箱
 	private String email;
 	//联系电话
@@ -194,5 +195,13 @@ public class UserDO implements Serializable {
 
 	public void setHeadPath(String headPath) {
 		this.headPath = headPath;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 }

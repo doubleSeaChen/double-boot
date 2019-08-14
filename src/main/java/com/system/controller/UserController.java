@@ -108,7 +108,7 @@ public class UserController {
 	 */
 	@PostMapping( "/remove/{id}")
 	@ResponseBody
-	@RequiresPermissions("system:user:delete")
+	@RequiresPermissions("sys:user:delete")
 	public Object remove(@PathVariable("id") String id){
 		if(userService.remove(id)>0){
 			return 1;

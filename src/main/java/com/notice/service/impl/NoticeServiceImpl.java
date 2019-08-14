@@ -82,5 +82,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public int batchRemove(String[] ids){
 		return noticeDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<Map<String, Object>> getNoticeUsers(String noticeId) {
+		return noticeDao.getNoticeUsers(noticeId);
+	}
 }

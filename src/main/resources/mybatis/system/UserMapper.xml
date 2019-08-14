@@ -6,34 +6,37 @@
 	<resultMap id="userResultMap" type="com.system.domain.UserDO">
 		<id property="userName" column="user_name"/>
 		<id property="headPath" column="head_path"/>
+		<id property="deptName" column="dept_name"/>
+		<id property="deptId" column="dept_id"/>
 	</resultMap>
 
 	<select id="get" resultMap="userResultMap">
-		select `id`,`user_name`,`name`,`password`,`sex`,`dept_id`,`email`,`phone`,
-		`address`,`create_user`,`create_date`,`is_delete`, `head_path` from user where id = #{value}
+		select t.`id`,t.`user_name`,t.`name`,`sex`,t.`dept_id`,t.`email`,t.`phone`,
+		t.`address`,t.`create_user`,t.`create_date`,t.`is_delete`, t.`head_path`, d.`name` dept_name from user t join dept d on t.dept_id = d.id
+		where t.id = #{value}
 	</select>
 
 	<select id="list" resultMap="userResultMap">
-		select `id`,`user_name`,`name`,`password`,`sex`,`dept_id`,`email`,`phone`,`address`,`create_user`,`create_date`,`is_delete`, `head_path` from user
+		select t.*, d.`name` dept_name from user t join dept d on t.dept_id = d.id
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="userName != null and userName != ''"> and user_name like '%${userName}%'</if>
-		  		  <if test="password != null and password != ''"> and password = #{password} </if>
-		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
-		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
-		  		  <if test="email != null and email != ''"> and email = #{email} </if>
-		  		  <if test="phone != null and phone != ''"> and phone = #{phone} </if>
-		  		  <if test="address != null and address != ''"> and address = #{address} </if>
-		  		  <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
-		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
-		  		  <if test="isDelete != null and isDelete != ''"> and is_delete = #{isDelete} </if>
+		  		  <if test="id != null and id != ''"> and t.id = #{id} </if>
+		  		  <if test="userName != null and userName != ''"> and t.user_name like '%${userName}%'</if>
+		  		  <if test="password != null and password != ''"> and t.password = #{password} </if>
+		  		  <if test="sex != null and sex != ''"> and t.sex = #{sex} </if>
+		  		  <if test="deptId != null and deptId != ''"> and t.dept_id = #{deptId} </if>
+		  		  <if test="email != null and email != ''"> and t.email = #{email} </if>
+		  		  <if test="phone != null and phone != ''"> and t.phone = #{phone} </if>
+		  		  <if test="address != null and address != ''"> and t.address = #{address} </if>
+		  		  <if test="createUser != null and createUser != ''"> and t.create_user = #{createUser} </if>
+		  		  <if test="createDate != null and createDate != ''"> and t.create_date = #{createDate} </if>
+		  		  <if test="isDelete != null and isDelete != ''"> and t.is_delete = #{isDelete} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by create_date desc
+                order by t.create_date desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
