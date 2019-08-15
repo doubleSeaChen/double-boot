@@ -87,4 +87,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Map<String, Object>> getNoticeUsers(String noticeId) {
 		return noticeDao.getNoticeUsers(noticeId);
 	}
+
+	@Override
+	public int removeUser(String id) {
+		return noticeDao.removeUser(id);
+	}
 }

@@ -92,4 +92,14 @@ public class NoticeController {
 		List<Map<String, Object>> noticeUsers = noticeService.getNoticeUsers(noticeId);
 		return noticeUsers;
 	}
+
+	@PostMapping( "/removeUser/{id}")
+	@ResponseBody
+	public Object removeUser(@PathVariable("id") String id){
+		if(noticeService.removeUser(id)>0){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 }

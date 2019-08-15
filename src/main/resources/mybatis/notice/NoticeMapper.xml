@@ -119,6 +119,10 @@
 	<delete id="remove">
 		delete from notice where id = #{value}
 	</delete>
+
+	<delete id="removeUser">
+		delete from  notice_record WHERE id = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		delete from notice where id in 

@@ -21,6 +21,8 @@ public interface NoticeService {
 	int update(NoticeDO notice);
 	
 	int remove(String id);
+
+	int removeUser(String id);
 	
 	int batchRemove(String[] ids);
 

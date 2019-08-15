@@ -27,5 +27,7 @@ public interface NoticeDao {
 	
 	int batchRemove(String[] ids);
 
+	int removeUser(String id);
+
 	List<Map<String, Object>> getNoticeUsers(String noticeId);
 }
